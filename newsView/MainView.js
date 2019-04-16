@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, Text,TouchableOpacity,Alert } from 'react-native';
-import {NavigationMain, NavigationDetails, NavigationCollection} from './NavigationBar';
 import TitleBar from './TitleBar';
 import PageView from './PageView';
 import DetailPage from './DetailPage';

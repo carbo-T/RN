@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, ActivityIndicator, Button, Alert, Dimensions} from 'react-native';
-import {MainView, Collection, Details} from '../view/MainView';
-import NavigationBar from '../view/NavigationBar';
+import {MainView, Collection, Details} from '../newsView/MainView';
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 var {height,width} =  Dimensions.get('window');
 
