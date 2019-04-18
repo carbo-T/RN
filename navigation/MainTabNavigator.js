@@ -4,7 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import PoetryScreen from '../screens/PoetryScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import NewsScreen from '../screens/NewsScreen';
 
@@ -26,12 +26,12 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const PoetryStack = createStackNavigator({
+  Poetry: PoetryScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+PoetryStack.navigationOptions = {
+  tabBarLabel: 'Poetry',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -70,7 +70,7 @@ NewsStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   MyHome:HomeStack,
-  Links:LinksStack,
+  Poetry:PoetryStack,
   History:HistoryStack,
   News:NewsStack,
 });

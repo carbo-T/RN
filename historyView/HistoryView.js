@@ -16,6 +16,7 @@ export default class HistoryView extends Component {
 		this._getData(this.state.date);
 	}
 	_getData(date) {
+		console.log(date);
 		if (date) {
 			let month = date.getMonth()+1;
 			let dayInMonth = date.getDate();
@@ -63,7 +64,7 @@ export default class HistoryView extends Component {
 		return (
 			<View style={myStyle.contentView}>
 				<View style={myStyle.datePickerView}>
-					<Text style={{fontSize:15,margin:20,flex:1}}>请选择日期:</Text>
+					<Text style={{fontSize:15,margin:20,flex:2}}>请选择日期:</Text>
 					<DatePicker
 						style={myStyle.datePicker}
 						date={this.state.date}
@@ -99,7 +100,7 @@ export default class HistoryView extends Component {
 let myStyle = StyleSheet.create({
 	contentView: {
 		flex: 1,
-		backgroundColor: '#dcdcdc',
+		backgroundColor: 'lavenderblush',
 		flexDirection: 'column',
 	},
 	datePickerView:{

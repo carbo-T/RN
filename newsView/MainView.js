@@ -11,7 +11,7 @@ export class MainView extends Component{
 		return{
 			title:'新闻主页',
 			headerStyle: {
-				backgroundColor: 'deepskyblue',
+				backgroundColor: 'skyblue',
 			},
 			headerTitleContainerStyle: {
 				justifyContent:'center',
@@ -59,7 +59,7 @@ export class Details extends Component{
 		return{
 			title:'详情',
 			headerStyle: {
-				backgroundColor: 'deepskyblue',
+				backgroundColor: 'skyblue',
 			},
 			headerTitleContainerStyle: {
 				justifyContent:'center',
@@ -102,7 +102,7 @@ export class Collection extends Component{
 	static navigationOptions = {
 		title:'收藏夹',
 		headerStyle: {
-			backgroundColor: 'deepskyblue',
+			backgroundColor: 'skyblue',
 		},
 		headerTitleContainerStyle: {
 			justifyContent:'center',
