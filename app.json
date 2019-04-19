@@ -8,6 +8,13 @@
       "ios",
       "android"
     ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yct.myCollection"
+    },
+    "android": {
+      "package": "com.yct.myCollection"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "splash": {
@@ -33,9 +40,6 @@
         "otf",
         "xml"
       ]
-    },
-    "ios": {
-      "supportsTablet": true
     }
   }
 }
