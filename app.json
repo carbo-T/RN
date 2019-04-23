@@ -13,7 +13,9 @@
       "bundleIdentifier": "com.yct.myCollection"
     },
     "android": {
-      "package": "com.yct.myCollection"
+      "package": "com.yct.myCollection",
+      "publishBundlePath": "android\\app\\src\\main\\assets\\shell-app.bundle",
+      "publishManifestPath": "android\\app\\src\\main\\assets\\shell-app-manifest.json"
     },
     "version": "1.0.0",
     "orientation": "portrait",
@@ -29,7 +31,7 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0
-     },
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -40,6 +42,11 @@
         "otf",
         "xml"
       ]
-    }
+    },
+    "isDetached": true,
+    "detach": {
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.10.8-sdk32.0.0-bca0f957-de78-44c8-91ed-f3151372d79d.tar.gz"
+    },
+    "scheme": "expf51c335a9cc24664b982395ce582a33f"
   }
 }

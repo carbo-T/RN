@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: host.exp.exponent:expo-app-auth:2.0.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-app-auth-2.0.0.aar/2f791be9bffba42da95291c36798d0fa/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-app-auth-2.0.0.aar/2f791be9bffba42da95291c36798d0fa/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../node_modules/expokit/maven/host/exp/exponent/expo-app-auth/2.0.0/expo-app-auth-2.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
