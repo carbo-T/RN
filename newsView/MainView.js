@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Text,TouchableOpacity,Alert } from 'react-native';
+import {View, StyleSheet, Text,TouchableOpacity,Alert} from 'react-native';
 import TitleBar from './TitleBar';
 import PageView from './PageView';
 import DetailPage from './DetailPage';
@@ -7,6 +7,7 @@ import CollectionView from './CollectionView';
 import DataManager from '../Tools/DataManager';
 
 export class MainView extends Component{
+
 	static navigationOptions = ({ navigation }) => {
 		return{
 			title:'新闻主页',
@@ -20,7 +21,7 @@ export class MainView extends Component{
 			headerTintColor: 'white',
 			headerTitleStyle: {
 				fontWeight: 'bold',
-				fontSize:25,
+				fontSize:22,
 			},
 			headerRight: (
 				<TouchableOpacity onPress={()=>{navigation.push('NewsCollection');}} style={{paddingRight:20}}>

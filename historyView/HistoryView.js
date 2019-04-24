@@ -75,7 +75,7 @@ export default class HistoryView extends Component {
 						showIcon={false}
 						customStyles={{
 							dateInput: {
-								borderColor: 'lavenderblush',
+								borderColor: 'ivory',
 							},
 							dateText:{
 								fontSize:17,
@@ -100,13 +100,13 @@ export default class HistoryView extends Component {
 let myStyle = StyleSheet.create({
 	contentView: {
 		flex: 1,
-		backgroundColor: 'lavenderblush',
+		backgroundColor: 'ivory',
 		flexDirection: 'column',
 	},
 	datePickerView:{
 		flexDirection:'row',
 		width: windowSize.width,
-		backgroundColor:'lavenderblush',
+		backgroundColor:'ivory',
 	},
 	datePicker:{
 		flex:3,
@@ -116,7 +116,7 @@ let myStyle = StyleSheet.create({
 		borderRadius:10,
 		marginLeft:20,
 		marginRight:20,
-		backgroundColor:'ivory',
+		backgroundColor:'lavenderblush',
 	},
 	title: {
 		fontSize: 18,

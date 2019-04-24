@@ -7,15 +7,15 @@ export default class HistoryScreen extends Component {
 		return{
 			title:'历史今日',
 			headerStyle: {
-				backgroundColor: 'lavender',
+				backgroundColor: 'skyblue',
 			},
 			headerTitleContainerStyle: {
 				justifyContent:'center',
 			},
-			headerTintColor: 'black',
+			headerTintColor: 'white',
 			headerTitleStyle: {
 				fontWeight: 'bold',
-				fontSize:25,
+				fontSize:22,
 			},
 		}
 	};

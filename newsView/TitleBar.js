@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, ScrollView, Text} from 'react-native';
+import {View, StyleSheet, ScrollView, Text, Dimensions} from 'react-native';
 
 export default class TitleBar extends Component{
 	constructor(props) {
@@ -33,6 +33,7 @@ export default class TitleBar extends Component{
 		);
 	}
 	selectTitle(index){
+		let windowSize = Dimensions.get('window');
 		let selectedTitles = [...this.state.selected];
 		selectedTitles[index]="rgb(0,0,0)";
 		if(index!=this.selectedIndex){
@@ -43,7 +44,7 @@ export default class TitleBar extends Component{
 		  selected: selectedTitles,
 		});
 		if(index<this.dataArray.length-4){
-			this.refs.scrollView.scrollTo({x:75*(index-2), animated:true});
+			this.refs.scrollView.scrollTo({x:(windowSize.width/4)*(index-2), animated:true});
 		}else{
 			this.refs.scrollView.scrollToEnd({animated:true});
 		}

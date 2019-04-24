@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, ScrollView, Dimensions, FlatList, Text, Platform, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, ScrollView, Dimensions, FlatList, Text, Platform, ActivityIndicator,PanResponder} from 'react-native';
 import NetTool from './../Tools/NetTool';
 import ItemView from './ItemView';
 
-const slideLeftOffset = 50;
-const slideRightOffset = 150;
+const slidePageOffset = 50;
+const slideMultiPagesOffset = 150;
 
 export default class PageView extends Component{
 
@@ -27,6 +27,43 @@ export default class PageView extends Component{
 	 	this.getData(0,1);
 	 	this.selectedIndex=0;
 	}
+
+	// componentWillMount(){
+	// 	let windowSize = Dimensions.get('window');
+    //     this._panResponder = PanResponder.create({
+    //         onStartShouldSetPanResponder: (evt, gestureState) => {
+    //             return true;
+    //         },
+    //         onMoveShouldSetPanResponder:  (evt, gestureState) => {
+    //             return true;
+	// 		},
+	// 		onStartShouldSetResponderCapture: (evt, gestureState) => {
+	// 			if(gestureState.vx>0.3 || gestureState.vx<-0.3){
+	// 				return true;
+	// 			}else{
+	// 				return false;
+	// 			}
+	// 		},
+	// 		onMoveShouldSetResponderCapture: (evt, gestureState) => {
+	// 			if(gestureState.vx>0.3 || gestureState.vx<-0.3){
+	// 				return true;
+	// 			}else{
+	// 				return false;
+	// 			}
+	// 		},
+    //         onPanResponderGrant: (evt, gestureState) => {   
+    //         },
+    //         onPanResponderMove: (evt, gestureState) => {
+    //             console.log(`gestureState.dx : ${gestureState.dx}   gestureState.dy : ${gestureState.dy}`);
+    //             console.log(`gestureState.vx : ${gestureState.vx}   gestureState.vy : ${gestureState.vy}`);
+    //         },
+    //         onPanResponderRelease: (evt, gestureState) => {
+    //         },
+    //         onPanResponderTerminate: (evt, gestureState) => {
+    //         },
+    //     });
+    // }
+
 	contentView(width){
 		let views = new Array();
 		for (let i = 0; i < this.netTool.serialName.length; i++) {
@@ -144,39 +181,60 @@ export default class PageView extends Component{
 		let windowSize = Dimensions.get('window');
 		//console.log(windowSize.width);
 		return(
-			<ScrollView showsHorizontalScrollIndicator={false} style={mainStyle.pageView} horizontal={true} pagingEnable={true} ref={'scrollView'} 
+			// <View {...this._panResponder.panHandlers}>
+				<ScrollView showsHorizontalScrollIndicator={false} style={mainStyle.pageView} horizontal={true} 
+				// pagingEnable={true} 
+				ref={'scrollView'} 
+				decelerationRate={0.1}
+				snapToInterval={windowSize.width}
+				snapToAlignment={"center"}
 				onMomentumScrollEnd={(param)=>{
-					//console.log(param.nativeEvent);
-					let index=this.selectedIndex;
-					let currentPos = param.nativeEvent.contentOffset.x;
-					let offset = currentPos-index*windowSize.width;
-					//console.log(offset,Number.parseInt(currentPos/windowSize.width));
-					//setTimeout(()=>{
-						if(offset<-slideRightOffset){
-							//index=Number.parseInt(currentPos/windowSize.width-0.9);
-							index=this.selectedIndex-1;
-						}else if(offset<-slideLeftOffset){
-							index=this.selectedIndex-1;
-						}else if(offset>slideLeftOffset && offset<=slideRightOffset){
-							index=this.selectedIndex+1;
-						}else if(offset>slideRightOffset){
-							//index=Number.parseInt(currentPos/windowSize.width+0.9);
-							index=this.selectedIndex+1;
-						}
-						index=index<0?0:index;
-						index=index>this.state.dataArray.length?this.state.dataArray.length:index;
-						//console.log("pageview scroll to:",index);
-						//console.log(this.state.dataArray);
-						this.props.onScroll(index);
-						if(this.state.dataArray[index].length==0){
-							this.getData(index,1);
-						}
-						this.refs.scrollView.scrollTo({x:windowSize.width*index, animated:true});
-						this.selectedIndex = index;
-					//},100);
-				}}>
-				{this.contentView(windowSize.width)}
-			</ScrollView>
+						//console.log(param.nativeEvent);
+						let index=this.selectedIndex;
+						let currentPos = param.nativeEvent.contentOffset.x;
+						let offset = currentPos-index*windowSize.width;
+						//console.log(offset,windowSize.width);
+						//console.log(param.nativeEvent.velocity);
+						//setTimeout(()=>{
+							if(offset<-slideMultiPagesOffset){
+								//index=Number.parseInt(currentPos/windowSize.width-0.9);
+								index=this.selectedIndex-1;
+							}else if(offset<-slidePageOffset){
+								index=this.selectedIndex-1;
+							}else if(offset>slidePageOffset && offset<=slideMultiPagesOffset){
+								index=this.selectedIndex+1;
+							}else if(offset>slideMultiPagesOffset){
+								//index=Number.parseInt(currentPos/windowSize.width+0.9);
+								index=this.selectedIndex+1;
+							}
+							index=index<0?0:index;
+							index=index>this.state.dataArray.length?this.state.dataArray.length:index;
+							//console.log("pageview scroll to:",index);
+							//console.log(this.state.dataArray);
+							this.refs.scrollView.scrollTo({x:windowSize.width*index, animated:false});
+							this.props.onScroll(index);
+							if(this.state.dataArray[index].length==0){
+								this.getData(index,1);
+							}
+							this.selectedIndex = index;
+						//},100);
+					}}
+					// // 限制左右滑动范围
+					// onScroll={(param)=>{
+					// 	let index=this.selectedIndex;
+					// 	let currentPos = param.nativeEvent.contentOffset.x;
+					// 	let offset = currentPos-index*windowSize.width;
+					// 	console.log(offset);
+					// 	if(offset>windowSize.width-slidePageOffset || offset<-windowSize.width+slidePageOffset){
+					// 		this.refs.scrollView.scrollEnabled = false;
+					// 	}else{
+					// 		this.refs.scrollView.scrollEnabled = true;
+					// 	}
+					// }}
+					>
+					{this.contentView(windowSize.width)}
+				</ScrollView>
+			// </View>
 		);
 	}
 

@@ -9,11 +9,68 @@ import {
   View,
   Button,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  welcomeContainer: {
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  welcomeImage: {
+    width: 100,
+    height: 80,
+    resizeMode: 'contain',
+    marginTop: 3,
+    marginLeft: -10,
+  },
+  contentContainer: {
+    paddingTop: 30,
+  },
+});
 
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
+  constructor(props){
+    super(props);
+    this.innerIndex = 2;
+    this.state = {
+      currentIndex:0,
+    };
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({ innerIndex: this.innerIndex });
+  }
+
+  static navigationOptions = ({navigation})=>({
+    // header: null,
+    title:"家",
+    headerStyle: {
+      backgroundColor: 'skyblue',	
+    },
+    headerTitleContainerStyle: {
+      justifyContent:'center',
+    },
+		headerTintColor: 'white',
+		headerTitleStyle: {
+      fontWeight: 'bold',
+      fontSize:22,
+    },
+    headerLeft: (
+      <TouchableOpacity onPress={()=>{console.log(navigation.getParam('innerIndex'))}} style={{paddingLeft:25,paddingRight:25,paddingTop:15,paddingBottom:15}}>
+				<Ionicons name="md-arrow-back" size={25} color="white" />
+			</TouchableOpacity>
+    ),
+    headerRight:(
+      <TouchableOpacity onPress={()=>{}} style={{paddingLeft:25,paddingRight:25,paddingTop:15,paddingBottom:15}}>
+				<Ionicons name="md-arrow-forward" size={25} color="white" />
+			</TouchableOpacity>
+    ),
+  });
 
   render() {
     return (
@@ -35,94 +92,5 @@ export default class HomeScreen extends React.Component {
       </View>
     );
   }
-
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
-});
