@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 export default class HomeScreen extends React.Component {
   constructor(props){
     super(props);
-    this.innerIndex = 2;
+    this.innerIndex = 3;
     this.state = {
       currentIndex:0,
     };
