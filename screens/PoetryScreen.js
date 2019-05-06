@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, Button, View, Text, ToastAndroid, TouchableOpacity, ActivityIndicator, Dimensions, PanResponder } from 'react-native';
 import NetTool from './../Tools/NetTool';
 import { Ionicons } from '@expo/vector-icons';
+import MyHeader from '../poetryView/myHeaders';
 
 /**滑动最小范围，暂未使用 */
 const slidePageOffset = 50;
@@ -77,25 +78,56 @@ export default class PoetryScreen extends React.Component {
       fontSize: 22,
     },
     headerLeft: (
-      <TouchableOpacity onPress={() => {
-        let instance = navigation.getParam('instance');
-        instance._leftSwitch();
-      }} style={{ paddingLeft: 25, paddingRight: 25, paddingTop: 15, paddingBottom: 15 }}>
-        {() => {
-          if (instance.state.currentIndex != 0) {
-            <Ionicons name="md-arrow-back" size={22} color="white" />
+      <MyHeader
+        color="white"
+        side="left"
+        min={0}
+        max={itemsPerRequest*maxListCount}
+        navigation={navigation}
+        onPress={() => {
+          let instance = navigation.getParam('instance');
+          instance._leftSwitch();
+          if (instance) {
+            console.log(instance.state.currentIndex);
+            return instance.state.currentIndex-1;
+          } else {
+            return 0;
           }
         }}
-
-      </TouchableOpacity>
+        update={()=>{
+          let instance = navigation.getParam('instance');
+          if (instance) {
+            return instance.state.currentIndex;
+          } else {
+            return 0;
+          }
+        }} />
     ),
     headerRight: (
-      <TouchableOpacity onPress={() => {
+      <MyHeader
+      color="white"
+      side="right"
+      min={0}
+      max={itemsPerRequest*maxListCount}
+      navigation={navigation}
+      onPress={() => {
         let instance = navigation.getParam('instance');
         instance._rightSwitch();
-      }} style={{ paddingLeft: 25, paddingRight: 25, paddingTop: 15, paddingBottom: 15 }}>
-        <Ionicons name="md-arrow-forward" size={22} color="white" />
-      </TouchableOpacity>
+        if (instance) {
+          console.log(instance.state.currentIndex);
+          return instance.state.currentIndex+1;
+        } else {
+          return 0;
+        }
+      }}
+      update={()=>{
+        let instance = navigation.getParam('instance');
+        if (instance) {
+          return instance.state.currentIndex;
+        } else {
+          return 0;
+        }
+      }} />
     ),
   });
 
@@ -120,7 +152,7 @@ export default class PoetryScreen extends React.Component {
   _rightSwitch() {
     let windowSize = Dimensions.get('window');
     let currIndex = this.state.currentIndex;
-    console.log(`length:${this.state.poems.length} index:${currIndex}`);
+    //console.log(`length:${this.state.poems.length} index:${currIndex}`);
     this.refs.scrollView.scrollTo({ x: windowSize.width * (currIndex + 1), animated: true });
     if (this.state.poems.length <= currIndex + 1) {
       ToastAndroid.show('到达最后，更新数据', ToastAndroid.SHORT);

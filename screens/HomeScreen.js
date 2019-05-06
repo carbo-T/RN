@@ -10,6 +10,7 @@ import {
   Button,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import MyHeader from '../poetryView/myHeaders';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,41 +35,86 @@ const styles = StyleSheet.create({
 });
 
 export default class HomeScreen extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.innerIndex = 3;
     this.state = {
-      currentIndex:0,
+      currentIndex: 0,
     };
   }
 
   componentDidMount() {
+    this.props.navigation.setParams({ instance: this });
+    // this.props.navigation.setParams({ headerRight: this.navigationOptions.headerRight });
+    // this.props.navigation.setParams({ headerLeft: this.navigationOptions.headerLeft });
     this.props.navigation.setParams({ innerIndex: this.innerIndex });
   }
 
-  static navigationOptions = ({navigation})=>({
+  static navigationOptions = ({ navigation }) => ({
     // header: null,
-    title:"家",
+    title: "家",
     headerStyle: {
-      backgroundColor: 'skyblue',	
+      backgroundColor: 'skyblue',
     },
     headerTitleContainerStyle: {
-      justifyContent:'center',
+      justifyContent: 'center',
     },
-		headerTintColor: 'white',
-		headerTitleStyle: {
+    headerTintColor: 'white',
+    headerTitleStyle: {
       fontWeight: 'bold',
-      fontSize:22,
+      fontSize: 22,
     },
     headerLeft: (
-      <TouchableOpacity onPress={()=>{console.log(navigation.getParam('innerIndex'))}} style={{paddingLeft:25,paddingRight:25,paddingTop:15,paddingBottom:15}}>
-				<Ionicons name="md-arrow-back" size={25} color="white" />
-			</TouchableOpacity>
+      <MyHeader
+        color="white"
+        side="left"
+        min={-1}
+        max={5}
+        navigation={navigation}
+        onPress={() => {
+          let instance = navigation.getParam('instance');
+          if (instance) {
+            instance.innerIndex -= 1;
+            // console.log(instance.innerIndex);
+            return instance.innerIndex;
+          } else {
+            return 0;
+          }
+        }}
+        update={()=>{
+          let instance = navigation.getParam('instance');
+          if (instance) {
+            return instance.innerIndex;
+          } else {
+            return 0;
+          }
+        }} />
     ),
-    headerRight:(
-      <TouchableOpacity onPress={()=>{}} style={{paddingLeft:25,paddingRight:25,paddingTop:15,paddingBottom:15}}>
-				<Ionicons name="md-arrow-forward" size={25} color="white" />
-			</TouchableOpacity>
+    headerRight: (
+      <MyHeader
+        color="white"
+        side="right"
+        min={-1}
+        max={5}
+        navigation={navigation}
+        onPress={() => {
+          let instance = navigation.getParam('instance');
+          if (instance) {
+            instance.innerIndex += 1;
+            // console.log(instance.innerIndex);
+            return instance.innerIndex;
+          } else {
+            return 0;
+          }
+        }}
+        update={()=>{
+          let instance = navigation.getParam('instance');
+          if (instance) {
+            return instance.innerIndex;
+          } else {
+            return 0;
+          }
+        }} />
     ),
   });
 
@@ -86,8 +132,9 @@ export default class HomeScreen extends React.Component {
               style={styles.welcomeImage}
             />
           </View>
-          <Button title="To News page" color="#8c4" onPress={()=>{this.props.navigation.navigate('News')}}/>
-
+          <Button title="To News page" color="#8c4" onPress={() => { this.props.navigation.navigate('News') }} />
+          <View style={{backgroundColor:'rgb(233,233,233)', height:1}}></View>
+          {/* <Button title="content changed" color="#8c4" onPress={() => { this.props.navigation.getParam('headerRight').onPress() }} /> */}
         </ScrollView>
       </View>
     );

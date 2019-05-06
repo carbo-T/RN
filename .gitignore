@@ -5,8 +5,8 @@ npm-debug.*
 *.p12
 *.key
 *.mobileprovision
-android/app/build/*
+/android/app/build/*
+/android/.gradle/*
+/android/.idea/*
 *.jks
 *.keystore
-android/.gradle/*
-android/.idea/*

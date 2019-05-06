@@ -73,4 +73,6 @@ export default createBottomTabNavigator({
   Poetry:PoetryStack,
   History:HistoryStack,
   News:NewsStack,
+},{
+  backBehavior:'none',
 });

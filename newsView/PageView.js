@@ -150,7 +150,7 @@ export default class PageView extends Component{
 				if(data==="error"){
 					alert("读取失败，请检查网络");
 				}
-				setInterval(()=>{
+				setTimeout(()=>{
 					this.releaseFlag();
 				},500);
 			}
